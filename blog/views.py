@@ -27,7 +27,10 @@ post_list = [
 
 
 def home(request):
-    return render(request, 'blog/home.html')
+    context = {
+        'posts': post_list
+    }
+    return render(request, 'blog/home.html', context)
 
 
 def about(request):
