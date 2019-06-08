@@ -10,6 +10,7 @@ def register(request):
         # hold submitted data in 'form'
 
         if form.is_valid():
+            form.save()
             username = form.cleaned_data.get('username')  # cleaned_data is data after validation
             messages.success(request, f'Account created for {username}!')
             return redirect('blog-home')
