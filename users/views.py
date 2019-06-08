@@ -12,7 +12,7 @@ def register(request):
         if form.is_valid():
             username = form.cleaned_data.get('username')  # cleaned_data is data after validation
             messages.success(request, f'Account created for {username}!')
-
+            return redirect('blog-home')
     else:
         # else show a new empty form
         form = UserCreationForm()
