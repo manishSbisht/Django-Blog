@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.fofrms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm
 
 # Creating a custom form class by inheriting from 'UserCreationForm'
 
