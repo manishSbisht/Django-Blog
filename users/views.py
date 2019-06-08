@@ -9,10 +9,11 @@ def register(request):
         form = UserRegistrationForm(request.POST)
         # hold submitted data in 'form'
 
-        form.save()
-        username = form.cleaned_data.get('username')  # cleaned_data is data after validation
-        messages.success(request, f'Account created for {username}!')
-        return redirect('blog-home')
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')  # cleaned_data is data after validation
+            messages.success(request, f'Account created for {username}!')
+            return redirect('blog-home')
     else:
         # else show a new empty form
         form = UserRegistrationForm()
