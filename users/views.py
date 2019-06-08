@@ -12,8 +12,8 @@ def register(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')  # cleaned_data is data after validation
-            messages.success(request, f'Account created for {username}!')
-            return redirect('blog-home')
+            messages.success(request, f'Account created for {username}! You may Log In now.')
+            return redirect('login')
     else:
         # else show a new empty form
         form = UserRegistrationForm()
