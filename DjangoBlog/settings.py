@@ -129,3 +129,10 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'blog-home'
 
 LOGIN_URL = 'login'
+
+# media root is root dir. for apps to store their uploaded files in seperate dirs of their own
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# media dir will be created inside project's root dir
+
+# media url is the public url of above 'media' dir
+MEDIA_URL = '/media/'
