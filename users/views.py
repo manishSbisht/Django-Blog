@@ -25,8 +25,8 @@ def register(request):
 def profile(request):
 
     # create instance of update forms
-    u_form = UserUpdateForm()
-    p_form = ProfileUpdateForm()
+    u_form = UserUpdateForm(instance=request.user.profile)
+    p_form = ProfileUpdateForm(instance=request.user.profile)
 
     # pass them to template
     context = {
