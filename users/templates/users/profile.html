@@ -1,4 +1,5 @@
 {%extends "blog/base.html"%}
+{% load crispy_forms_tags %}
 {%block content%}
 <div class="content-section">
     <div class="media">
@@ -8,6 +9,19 @@
             <p class="text-secondary">{{user.email}}</p>
         </div>
     </div>
-    <!-- FORM HERE -->
+
+    <form action="" method="POST" enctype="multipart/form-data">
+        <!-- 'multipart/form-data' specify that data is of multiple formats -->
+        <!-- withuout it image file will not be uploaded properly -->
+        {%csrf_token%}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Profile Info</legend>
+            {{u_form|crispy}}
+            {{p_form|crispy}}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" , type="submit">Update</button>
+        </div>
+    </form>
 </div>
 {%endblock content%}
