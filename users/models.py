@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     # user profile have one to one relationship with User model
     # on delete of User object, related profile object will also be deleted,
     # but not the other way around.
