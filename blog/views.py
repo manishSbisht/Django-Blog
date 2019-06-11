@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Post
-# Create your views here.
+from django.views.generic import ListView
 
 
 def home(request):
@@ -9,6 +9,12 @@ def home(request):
         'posts': Post.objects.all()
     }
     return render(request, 'blog/home.html', context, {'title': 'Home'})
+
+
+class PostListView(ListView):
+    model = Post
+    template_name = 'blog/home.html'  # default format: '<app>/<model_viewtype>.html'
+    context_object_name = 'posts'
 
 
 def about(request):
