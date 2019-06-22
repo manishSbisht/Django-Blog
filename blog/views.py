@@ -14,7 +14,7 @@ def home(request):
 class PostListView(ListView):
     model = Post
     template_name = 'blog/home.html'  # default format: '<app>/<model_viewtype>.html'
-    context_object_name = 'posts'
+    context_object_name = 'posts'  # variable to loop over posts
     ordering = '-date_posted'  # minus sign to sort in descending order(new to old)
 
 
