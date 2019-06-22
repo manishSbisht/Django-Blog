@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Post
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 
 def home(request):
@@ -16,6 +16,13 @@ class PostListView(ListView):
     template_name = 'blog/home.html'  # default format: '<app>/<model_viewtype>.html'
     context_object_name = 'posts'  # variable to loop over posts
     ordering = ['-date_posted']  # minus sign to sort in descending order(new to old)
+
+
+class PostDetailView(DetailView):
+    model = Post
+    # Rest of the variable will have their default values
+    # template used should be present at: '<app>/<model_viewtype>.html'
+    # context object is named: "object"
 
 
 def about(request):
