@@ -15,8 +15,13 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.user.username} Profile'
 
-    def save(self):
-        super().save()  # run the defaut save fucntion, then
+    """  
+    overriding default save method below.
+    To preserve its signature, *args & **kwargs must be passed after modification
+    """
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # run the defaut save fucntion, then
         img = Image.open(self.image.path)
         if img.height > 300 or img.width > 300:
             output_size = (300, 300)
