@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Post
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
@@ -27,6 +27,20 @@ class PostDetailView(DetailView):
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
+    model = Post
+    fields = ['title', 'content']
+    # defualt template name is: <model>_form.html
+
+    # overriding form_valid() method to set the author of new post
+    def form_valid(self, form):
+        # set current user as the author of newly created post
+        form.instance.author = self.request.user
+
+        # now run the modified form_valid() method after above change
+        return super().form_valid(form)
+
+
+class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = Post
     fields = ['title', 'content']
     # defualt template name is: <model>_form.html
