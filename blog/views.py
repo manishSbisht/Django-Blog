@@ -1,7 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Post
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import (ListView,
+                                  DetailView,
+                                  CreateView,
+                                  UpdateView,
+                                  DeleteView)
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
@@ -62,6 +66,24 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         # if current user is author of current post
         if self.request.user == post.author:
             return True
+        return False
+
+
+class PostDeleteView(DeleteView):
+    model = Post
+    # Rest of the variable will have their default values
+    # template used should be present at: '<app>/<model_viewtype>.html'
+    # context object is named: "object"
+
+    success_url = "/"  # redirect to homepage upon successful deletion
+
+    def test_func(self):
+        post = self.get_object()  # return the object view is displaying
+
+        # if current user is author of current post
+        if self.request.method == "POST" and self.request.user.is_authenticated:
+            if self.request.user == post.author:
+                return True
         return False
 
 
