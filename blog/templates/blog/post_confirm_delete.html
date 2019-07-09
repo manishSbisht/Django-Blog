@@ -1,6 +1,8 @@
 {%extends "blog/base.html"%}
 
 {%block content%}
+<!-- if user is not authenticated or is not the author, then render a empty page -->
+{%if request.user.is_authenticated and request.user == post.author %}
 <div class="content-section">
     <form action="" method="POST">
         {%csrf_token%}
@@ -15,4 +17,5 @@
         </div>
     </form>
 </div>
+{% endif %}
 {%endblock content%}
